@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class LiveStationService {
-    @Value("${cloud.ncp.access.key}")
+    @Value("${ncp.accessKey}")
     String accessKey;
-    @Value("${cloud.ncp.secret.key}")
+    @Value("${ncp.secretKey}")
     String secretKey;
     String bucket = "bitcamp121";
 

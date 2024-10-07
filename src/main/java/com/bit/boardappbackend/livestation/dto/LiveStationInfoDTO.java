@@ -15,5 +15,8 @@ public class LiveStationInfoDTO {
     private String publishUrl;
     private String streamKey;
 
+    private Long sellerId; // 판매자 ID 추가
+    private String userRole; // 'seller' 또는 'buyer'로 구분
+
     private int lectureId;
 }

@@ -22,10 +22,14 @@ public class BoardDto {
     private String nickname;
     private LocalDateTime regdate;
     private LocalDateTime moddate;
+    private LocalDateTime auctionStart;
     private int cnt;
     private String searchKeyword;
     private String searchCondition;
     private List<BoardFileDto> boardFileDtoList;
+
+    private boolean chatRoomCreated;
+    private boolean streamingCreated;
 
     public Board toEntity(Member member) {
         return Board.builder()
@@ -39,6 +43,9 @@ public class BoardDto {
                 .searchKeyword(this.searchKeyword)
                 .searchCondition(this.searchCondition)
                 .boardFileList(new ArrayList<>())
+                .auctionStart(this.auctionStart)
+                .chatRoomCreated(this.chatRoomCreated)
+                .streamingCreated(this.streamingCreated)
                 .build();
     }
 }

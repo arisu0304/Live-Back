@@ -22,7 +22,11 @@ public class QBoard extends EntityPathBase<Board> {
 
     public static final QBoard board = new QBoard("board");
 
+    public final DateTimePath<java.time.LocalDateTime> auctionStart = createDateTime("auctionStart", java.time.LocalDateTime.class);
+
     public final ListPath<BoardFile, QBoardFile> boardFileList = this.<BoardFile, QBoardFile>createList("boardFileList", BoardFile.class, QBoardFile.class, PathInits.DIRECT2);
+
+    public final BooleanPath chatRoomCreated = createBoolean("chatRoomCreated");
 
     public final NumberPath<Integer> cnt = createNumber("cnt", Integer.class);
 
@@ -35,6 +39,8 @@ public class QBoard extends EntityPathBase<Board> {
     public final DateTimePath<java.time.LocalDateTime> moddate = createDateTime("moddate", java.time.LocalDateTime.class);
 
     public final DateTimePath<java.time.LocalDateTime> regdate = createDateTime("regdate", java.time.LocalDateTime.class);
+
+    public final BooleanPath streamingCreated = createBoolean("streamingCreated");
 
     public final StringPath title = createString("title");
 

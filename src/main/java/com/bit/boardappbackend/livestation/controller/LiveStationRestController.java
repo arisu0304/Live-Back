@@ -98,15 +98,25 @@ public class LiveStationRestController {
         return liveStationService.deleteChannel(channelId);
     }
 
-    @GetMapping("/lecture/{liveStationId}")
+    @GetMapping("/auction/{liveStationId}")
     public ResponseEntity<?> getLiveStation(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                                             @PathVariable String liveStationId) {
         ResponseDto<LiveStationInfoDTO> response = new ResponseDto<>();
 
-//        Lecture lecture = lectureService.getLectureLiveStationId(liveStationId);
+        // 현재 접속한 사용자 정보 가져오기
+        String currentUsername = customUserDetails.getUsername();
 
+        // 라이브 스테이션 정보 가져오기
         LiveStationInfoDTO liveStationInfoDTO = liveStationService.getChannelInfo(liveStationId);
-//        liveStationInfoDTO.setLectureId(lecture.getId());
+
+        // 해당 경매 물품의 작성자 정보와 현재 로그인한 사용자 비교
+        if (liveStationInfoDTO.getSellerId().equals(currentUsername)) {
+            // 판매자라면 OBS 스트리밍을 위한 설정 제공
+            liveStationInfoDTO.setUserRole("seller");
+        } else {
+            // 구매자라면 스트리밍 시청과 채팅방 입장 제공
+            liveStationInfoDTO.setUserRole("buyer");
+        }
 
         response.setItem(liveStationInfoDTO);
         response.setStatusCode(HttpStatus.OK.value());

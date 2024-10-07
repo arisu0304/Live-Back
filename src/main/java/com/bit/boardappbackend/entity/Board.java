@@ -35,6 +35,7 @@ public class Board {
     private Member member;
     private LocalDateTime regdate;
     private LocalDateTime moddate;
+    private LocalDateTime auctionStart;
     private int cnt;
     @Transient
     private String searchKeyword;
@@ -43,6 +44,10 @@ public class Board {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<BoardFile> boardFileList;
+
+    // 경매가 15분 전에 채팅방이 생성되었는지 여부를 저장
+    private boolean chatRoomCreated;
+    private boolean streamingCreated;
 
 
     public BoardDto toDto() {
@@ -57,11 +62,14 @@ public class Board {
                 .cnt(this.cnt)
                 .searchKeyword(this.searchKeyword)
                 .searchCondition(this.searchCondition)
+                .auctionStart(this.auctionStart)
                 .boardFileDtoList(
                         boardFileList != null && boardFileList.size() > 0
                             ? boardFileList.stream().map(BoardFile::toDto).toList()
                             : new ArrayList<>()
                 )
+                .chatRoomCreated(this.chatRoomCreated)
+                .streamingCreated(this.streamingCreated)
                 .build();
     }
 
